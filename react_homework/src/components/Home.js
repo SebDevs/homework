@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: start;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     height: 100%;
     background-position: center;
     background-size: cover;
@@ -29,6 +29,8 @@ const Langlist = styled.div`
     flex-direction: column;
     padding: 0px;
     line-height: 1px;
+    width: 100%
+    margin-left: 13px;
 `
 const Langitem = styled.p`
     padding: 2px;
@@ -42,7 +44,7 @@ const Langwrapper = styled.div`
     flex-direction: column;
     -webkit-box-shadow: 0px 0px 14px 4px #f0f0f0; 
     box-shadow: 0px 0px 14px 4px #f0f0f0;
-    width: 430px;
+    width: 100%;
     margin-top: 20px;
 
 `
@@ -66,6 +68,8 @@ const LogoutBtn = styled(Submitbtn)`
 const Inputgoup = styled.div`
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
 `
 const Homepage = () => {
     const baseUrl = "https://apidev.navigil.io/lang/list-locale"
@@ -194,8 +198,8 @@ const Homepage = () => {
         
         <Wrapper className='wrapper'>
             <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
-            <Inputgoup>
-            <Inputfield type="text" 
+            <Inputgoup className='debug'>
+            <Inputfield className='inp-field' type="text" 
                 onChange={e=>onChangeHandler(e.target.value)}
                 onFocus={toggleVisibility}
                 value={text}

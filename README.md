@@ -8,3 +8,7 @@ This is a small project with an log in and fetching data from external sources t
 **Clone the project**
 Run the command `npm install`  to install all the needed dependencies.
 After this you can run the project by running `npm start`
+
+
+**Disclaimer**
+Still needing fixes for stylings and make the th page more responsive

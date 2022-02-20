@@ -36,8 +36,8 @@ h2 {
   background: aliceblue;
 }
 .lang-list {
-  max-width: 70%;
   word-break: break-word;
+  max-width: 800px;
 }
 .input-label {
   padding: 5px;
@@ -48,5 +48,12 @@ h2 {
     width: 600px;
 }
 .table-data {
-  overflow-y: visible;
+  overflow-y: scroll;
+}
+.rdt_Table {
+  border: 1px solid #e6e6e6;
+  margin-bottom: 50px;
+}
+.inp-field {
+  flex: 2;
 }
