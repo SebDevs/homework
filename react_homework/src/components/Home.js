@@ -1,8 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useForm } from "react-hook-form";
-import Navlogo from './Logocomponent';
 import Chartdata from './Graphs';
 
 const Wrapper = styled.div`
@@ -197,7 +195,9 @@ const Homepage = () => {
     return (
         
         <Wrapper className='wrapper'>
+        
             <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
+            <h3>Type language name to filter list</h3>
             <Inputgoup className='debug'>
             <Inputfield className='inp-field' type="text" 
                 onChange={e=>onChangeHandler(e.target.value)}

@@ -50,11 +50,16 @@ const Labelcomponent = styled.label`
 const Loginpage = () => {
     const baseUrl = "https://dev.navigil.io"
     const [background, setBgImage] = useState('');
+    const [formText, setFormText] = useState('')
+    const [copyRight, setCopyRight] = useState('')
+    const [navLink, setNavLink] = useState('')
     const { register, handleSubmit } = useForm();
     const onSubmit = ()=> handleLogin();
 
     //effect for setting random background image
     useEffect(() => {
+
+        //This should be written under one request and then parse data from that e.g get setting names in states
         async function getImageUrl() {
             let url = 'https://apidev.navigil.io/base/get-loginpage-settings';
             try {
@@ -72,6 +77,27 @@ const Loginpage = () => {
                 .then(imgArray => setBgImage(imgArray[Math.floor(Math.random() * imgArray.length)]));
         }
         setBackgroundUrl();
+
+        //sets the header for login form
+        const setTextStates = async () => {
+            await getImageUrl()
+                .then(data => data.body[0].filter(x => x.setting_name === "login-form-text").pop().data)
+                .then(txt => setFormText(txt));
+        }
+        setTextStates();
+
+        //sets the header for login form
+        const setCopyR = async () => {
+            await getImageUrl()
+                .then(data => data.body[0].filter(x => x.setting_name === "copy-text").pop().data)
+                .then(txt => setCopyRight(txt));
+            await getImageUrl()
+            .then(data => data.body[0].filter(x => x.setting_name === "copy-link").pop().data)
+            .then(txt => setNavLink(txt));
+        }
+        setCopyR();
+        //sets the header for login form
+        
 
     }, [])
 
@@ -92,12 +118,14 @@ const Loginpage = () => {
         <Wrapper className='wrapper' style={divStyle}>
             <Navlogo />
             <Formcomponent onSubmit={handleSubmit(onSubmit)}>
-                <h2>Please login</h2>
+                <h2>{formText}</h2>
                 <Labelcomponent>Email</Labelcomponent>
                 <Inputfield {...register("eMail", { required: true, pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/i })} />
                 <Labelcomponent>Password</Labelcomponent>
                 <Inputfield type="password" {...register("pswd", { minLength: 8, required: true})} />
                 <Inputfieldsubmit className='submit-btn' type="submit"/>
+                <span className='copy-r'>{copyRight}</span>
+                <a href={navLink} target="blank" rel="noreferrer noopener">navigil.com</a>
             </Formcomponent>
         </Wrapper>
     );
