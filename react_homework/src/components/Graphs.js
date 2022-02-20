@@ -97,7 +97,7 @@ const Chartdata = () => {
             labels,
             datasets: [
                 {
-                    label: "Dataset 1",
+                    label: "Available options",
                     data: langPairs.map((z) => z[1]),
                     backgroundColor:
                         colorArr[Math.floor(Math.random() * colorArr.length)],

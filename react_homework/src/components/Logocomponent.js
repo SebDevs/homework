@@ -49,8 +49,7 @@ const Navlogo = () => {
     };
 
     return (
-        <Logoimg className='logo-img' style={divStyle}>
-        </Logoimg>
+        <Logoimg className='logo-img' style={divStyle}></Logoimg>
     );
 }
 
