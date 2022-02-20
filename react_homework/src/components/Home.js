@@ -150,7 +150,10 @@ const Homepage = () => {
         .then((data) => data.jsonResponse.body[{languageKeys}.languageKeys.keys[{text}.text]])
         .then(x => setTranslations(x))
     }
-    
+    const handleLogout = () => {
+        localStorage.clear();
+        window.location.pathname = "/login"
+    }
     const langList = languages.sort()            
     const sortedLangs = suggestions.length === 0 ? 
         langList.map((lang, i) => (
@@ -169,7 +172,9 @@ const Homepage = () => {
     )); 
 
     return (
+        
         <Wrapper className='wrapper'>
+            <button onClick={handleLogout}>Logout</button>
             <Inputgoup>
             <Inputfield type="text" 
                 onChange={e=>onChangeHandler(e.target.value)}

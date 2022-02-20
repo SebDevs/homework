@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Lato', sans-serif;
+    width: 100%;
 `
 const Formcomponent = styled.form`
     display: flex;
@@ -77,7 +78,14 @@ const Loginpage = () => {
     //object for setting the backgorund image for the login page
     const divStyle = {
         backgroundImage: `url(${baseUrl}${background})`
+    
     };
+
+    const handleLogin = () => {
+    //Signin Ok
+      localStorage.setItem("isAuthenticated", "true");
+      window.location.pathname = "/";
+    }
 
     return (
         
@@ -89,7 +97,7 @@ const Loginpage = () => {
                 <Inputfield {...register("eMail", { required: true, pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/i })} />
                 <Labelcomponent>Password</Labelcomponent>
                 <Inputfield type="password" {...register("pswd", { minLength: 8, maxLength: 8 })} />
-                <Inputfieldsubmit className='submit-btn' type="submit" />
+                <Inputfieldsubmit className='submit-btn' type="submit" onClick={handleLogin}/>
             </Formcomponent>
         </Wrapper>
     );
