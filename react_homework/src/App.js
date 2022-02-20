@@ -1,9 +1,16 @@
 import './App.css';
+import Homepage from './components/Home';
 import Loginpage from './components/Login';
+//<Loginpage />
 
 function App() {
   return (
-    <Loginpage />
+    <div>
+      
+      <Homepage />
+    </div>
+      
+    
   );
 }
 

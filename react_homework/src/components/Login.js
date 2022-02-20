@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useForm } from "react-hook-form";
+import Navlogo from './Logocomponent';
 
 const Wrapper = styled.div`
     display: flex;
@@ -79,7 +80,9 @@ const Loginpage = () => {
     };
 
     return (
+        
         <Wrapper className='wrapper' style={divStyle}>
+            <Navlogo />
             <Formcomponent onSubmit={handleSubmit(onSubmit)}>
                 <h2>Please login</h2>
                 <Labelcomponent>Email</Labelcomponent>
