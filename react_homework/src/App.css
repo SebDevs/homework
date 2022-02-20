@@ -8,6 +8,10 @@ body {
   height: 100%;
   font-family: 'Lato', sans-serif;
 }
+div {
+  overflow-y: visible !important;
+  
+}
 #root {
   height: 100%;
   display: flex;
@@ -22,6 +26,7 @@ h2 {
   padding-bottom: 18px;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
+  margin-top: 25px;
 }
 .logo-img {
   border: none !important;
@@ -37,4 +42,11 @@ h2 {
 .input-label {
   padding: 5px;
   border: 1px solid #eeeeee;
+}
+.bar-chart {
+    height: 300px;
+    width: 600px;
+}
+.table-data {
+  overflow-y: visible;
 }

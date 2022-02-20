@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import Navlogo from './Logocomponent';
+import Chartdata from './Graphs';
 
 const Wrapper = styled.div`
     display: flex;
@@ -67,7 +68,6 @@ const Inputgoup = styled.div`
     flex-direction: row;
 `
 const Homepage = () => {
-    
     const baseUrl = "https://apidev.navigil.io/lang/list-locale"
     const [languages, setLanguages ] = useState([]);
     const [text, setText] = useState('');
@@ -83,7 +83,7 @@ const Homepage = () => {
     
 
 
-    //get languages
+    //get available languages
     useEffect(() => {
         const loadLanguages = async() => {
             const response = await fetch(baseUrl)
@@ -102,7 +102,7 @@ const Homepage = () => {
     }))
     },[]);
     
-
+    //listens for changes in the input field and shows suggestion of languages matching string
     const onChangeHandler = (text) => {
         console.log(text)
         let matchingText = [];
@@ -116,11 +116,14 @@ const Homepage = () => {
         setText(text);
     }
 
+    //handles hook states for visibility of elements and sets the input text to state
     const onLanguageSelect = (text) => {
         setText(text);
         setSuggestions([]);
         setDispplaySuggestion(false)
     }
+
+    //visibilityhandler for elements
     const toggleVisibility = (event) => {
         event.stopPropagation();
         setDispplaySuggestion(true)
@@ -129,6 +132,7 @@ const Homepage = () => {
     }
     const toggleState = (event) => {
         event.stopPropagation();
+        //TODO Fix this with async function
         setTimeout(() => {
             setDisplayTranslations(true)
             setdisplayGroupsList(false)
@@ -141,28 +145,33 @@ const Homepage = () => {
             const response = await fetch(uiUrl)
             return await response.json();
     }
+    //function that handles the submit of selected language
     const handleSubmit = async () => {
         const selectedLang = {languageKeys}.languageKeys.keys[{text}.text];
         await loadLangkeys()
         .then(x => setGroupnames(Object.keys(x.body[selectedLang]))).finally(setdisplayGroupsList(true))
     }
-
+    
+    //Get the available translations 
     const getTranslations = async (data) =>{
             const response = await fetch(uiUrl)
             const jsonResponse = await response.json();
             return  {jsonResponse,data}
     }
-    
+    //shows translations for selected language and group
     const showTanslations = async (langOpt) =>{
         setGroupOption(langOpt)
         return await getTranslations(langOpt)
         .then((data) => data.jsonResponse.body[{languageKeys}.languageKeys.keys[{text}.text]])
         .then(x => setTranslations(x))
     }
+
+    //LogoutHandler
     const handleLogout = () => {
         localStorage.clear();
         window.location.pathname = "/login"
     }
+    //Show languages sorted alphabetically and function handles rendering of whole list and sugggestions
     const langList = languages.sort()            
     const sortedLangs = suggestions.length === 0 ? 
         langList.map((lang, i) => (
@@ -173,7 +182,8 @@ const Homepage = () => {
         <Langlist className='lang-item' key={i}>
             <Langitem onClick={() => onLanguageSelect(lang) }>{lang}</Langitem >
         </Langlist>))
-
+    
+    //list for available setting/groupname
     const groupsList = {goupNames}.goupNames.map((langOpt, ie) => (
         <Langlist className='lang-item' key={ie}>
                 <Langitem onClick={(e) => (showTanslations(langOpt), toggleState(e)) }>{langOpt}</Langitem >
@@ -211,6 +221,7 @@ const Homepage = () => {
                 ))}
                 </Langwrapper>
                 : null }
+                <Chartdata />
         </Wrapper>
     );
 }
