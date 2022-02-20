@@ -46,13 +46,21 @@ const Langwrapper = styled.div`
 
 `
 const Submitbtn = styled.button`
-    padding: 2px 30px;
+    padding: 2px 14px;
     border-radius: 5px;
     border: none;
     background-color: #58ddff;
     color: white;
     margin: 6px;
     cursor: pointer;
+`
+const LogoutBtn = styled(Submitbtn)`
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    padding: 10px;
+    background-color:  #f7b8ff;
+   
 `
 const Inputgoup = styled.div`
     display: flex;
@@ -71,7 +79,7 @@ const Homepage = () => {
     const [displayTranslations, setDisplayTranslations] = useState(false);
     const [groupOtion, setGroupOption] = useState('')
     const [displayGroupsList, setdisplayGroupsList ] = useState(false);
-    const [sub, setSub] = useState(false);
+    const [btnState, setbtnState] = useState('Show group names');
     
 
 
@@ -111,19 +119,20 @@ const Homepage = () => {
     const onLanguageSelect = (text) => {
         setText(text);
         setSuggestions([]);
-        setDispplaySuggestion(false) 
+        setDispplaySuggestion(false)
     }
     const toggleVisibility = (event) => {
         event.stopPropagation();
         setDispplaySuggestion(true)
-        setdisplayGroupsList(true)   
+        setdisplayGroupsList(false)
+        setDisplayTranslations(false)
     }
     const toggleState = (event) => {
         event.stopPropagation();
         setTimeout(() => {
             setDisplayTranslations(true)
             setdisplayGroupsList(false)
-        },5000)
+        },3000)
         
     }
 
@@ -174,14 +183,14 @@ const Homepage = () => {
     return (
         
         <Wrapper className='wrapper'>
-            <button onClick={handleLogout}>Logout</button>
+            <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
             <Inputgoup>
             <Inputfield type="text" 
                 onChange={e=>onChangeHandler(e.target.value)}
                 onFocus={toggleVisibility}
                 value={text}
                 />
-                <Submitbtn onClick={handleSubmit}>Show options</Submitbtn>
+                <Submitbtn onClick={handleSubmit}>{btnState}</Submitbtn>
             </Inputgoup>
            
                 { displaySuggestions ? 

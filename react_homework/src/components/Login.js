@@ -51,7 +51,7 @@ const Loginpage = () => {
     const baseUrl = "https://dev.navigil.io"
     const [background, setBgImage] = useState('');
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = ()=> handleLogin();
 
     //effect for setting random background image
     useEffect(() => {
@@ -96,8 +96,8 @@ const Loginpage = () => {
                 <Labelcomponent>Email</Labelcomponent>
                 <Inputfield {...register("eMail", { required: true, pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/i })} />
                 <Labelcomponent>Password</Labelcomponent>
-                <Inputfield type="password" {...register("pswd", { minLength: 8, maxLength: 8 })} />
-                <Inputfieldsubmit className='submit-btn' type="submit" onClick={handleLogin}/>
+                <Inputfield type="password" {...register("pswd", { minLength: 8, required: true})} />
+                <Inputfieldsubmit className='submit-btn' type="submit"/>
             </Formcomponent>
         </Wrapper>
     );
