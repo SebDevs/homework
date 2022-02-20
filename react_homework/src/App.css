@@ -57,3 +57,11 @@ h2 {
 .inp-field {
   flex: 2;
 }
+.copy-r {
+  padding: 5px;
+  margin-top: 12px;
+}
+
+a {
+  color: rgb(77, 77, 196)
+}
