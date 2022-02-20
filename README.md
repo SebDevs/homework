@@ -11,4 +11,4 @@ After this you can run the project by running `npm start`
 
 
 **Disclaimer**
-Still needing fixes for stylings and make the th page more responsive
+The app still needs fixes for stylings and make the page more responsive
